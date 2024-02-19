@@ -19,17 +19,29 @@ const newTaskInput = document.querySelector('.create-new-task-input');
 const newTaskConfirm = document.querySelector('.btn-new-task-confirm');
 const newTaskDeny = document.querySelector('.btn-new-task-deny');
 //For section deletion confirm
-const deletionConfirmModal = document.querySelector('.confirm-section-deletion');
+const deletionConfirmModal = document.querySelector(
+  '.confirm-section-deletion'
+);
 const deletionConfirmBtn = document.querySelector('.btn-deletion-confirm');
 const deletionDeny = document.querySelector('.btn-deletion-deny');
 //For task deletion confirm
-const taskDeletionConfirmModal = document.querySelector('.confirm-task-deletion');
-const taskDeletionConfirmBtn = document.querySelector('.btn-task-deletion-confirm');
+const taskDeletionConfirmModal = document.querySelector(
+  '.confirm-task-deletion'
+);
+const taskDeletionConfirmBtn = document.querySelector(
+  '.btn-task-deletion-confirm'
+);
 const taskDeletionDenyBtn = document.querySelector('.btn-task-deletion-deny');
+//Editing Task Name
+const editTaskModal = document.querySelector('.editing-task');
+const editTaskConfirmBtn = document.querySelector('.btn-new-task-name-confirm');
+const editTaskDenyBtn = document.querySelector('.btn-new-task-name-deny');
+const editTaskInput = document.querySelector('.edit-task-input');
 //General Perpose Flags
 let globalSectionParent = null;
 let globalTaskList = null;
 let globalTask = null;
+let globalTaskTitle = null;
 //For validate confirming
 const validateConfirming = function (targetModal, targetInput, generalPerpose) {
   const inputValue = targetInput.value;
@@ -59,6 +71,8 @@ const validateConfirming = function (targetModal, targetInput, generalPerpose) {
         tasksList.classList.add('open-tasks-section');
         creatTask(tasksList, taksTitle);
       }
+    } else if (targetModal === editTaskModal) {
+      generalPerpose.textContent = targetInput.value;
     }
   }
 };
@@ -67,27 +81,34 @@ const validatingDenining = function (targetModal) {
   document.body.classList.remove('overflow-hidden');
   targetModal.style.transform = ``;
 };
-taskDeletionConfirmBtn.addEventListener('click',function(){
+editTaskConfirmBtn.addEventListener('click', function () {
+  overlay.classList.add('hidden');
+  document.body.classList.remove('overflow-hidden');
+  editTaskModal.style.transform = ``;
+  validateConfirming(editTaskModal, editTaskInput, globalTaskTitle);
+});
+editTaskDenyBtn.addEventListener('click', function () {});
+taskDeletionConfirmBtn.addEventListener('click', function () {
   overlay.classList.add('hidden');
   document.body.classList.remove('overflow-hidden');
   taskDeletionConfirmModal.style.transform = ``;
   globalTaskList.removeChild(globalTask);
 });
-taskDeletionDenyBtn.addEventListener('click',function(){
-   overlay.classList.add('hidden');
-   document.body.classList.remove('overflow-hidden');
-   taskDeletionConfirmModal.style.transform = ``;
+taskDeletionDenyBtn.addEventListener('click', function () {
+  overlay.classList.add('hidden');
+  document.body.classList.remove('overflow-hidden');
+  taskDeletionConfirmModal.style.transform = ``;
 });
-deletionConfirmBtn.addEventListener('click',function(){
+deletionConfirmBtn.addEventListener('click', function () {
   overlay.classList.add('hidden');
   document.body.classList.remove('overflow-hidden');
   deletionConfirmModal.style.transform = ``;
   container.removeChild(globalSectionParent);
 });
-deletionDeny.addEventListener('click',function(){
-   overlay.classList.add('hidden');
-   document.body.classList.remove('overflow-hidden');
-   deletionConfirmModal.style.transform = ``;
+deletionDeny.addEventListener('click', function () {
+  overlay.classList.add('hidden');
+  document.body.classList.remove('overflow-hidden');
+  deletionConfirmModal.style.transform = ``;
 });
 const changeSectionName = function (sectionTitle) {
   confirEditingSection.addEventListener('click', function () {
@@ -139,10 +160,12 @@ container.addEventListener('click', function (event) {
     newTaskModal.style.transform = `translateY(${window.scrollY + 50}px)`;
     newTaskInput.value = '';
   } else if (eventTarget.classList.contains('delete-section')) {
-     overlay.classList.remove('hidden');
-     overlay.style.top = `${window.scrollY}`;
-     document.body.classList.add('overflow-hidden');
-     deletionConfirmModal.style.transform = `translateY(${window.scrollY + 50}px)`;
+    overlay.classList.remove('hidden');
+    overlay.style.top = `${window.scrollY}`;
+    document.body.classList.add('overflow-hidden');
+    deletionConfirmModal.style.transform = `translateY(${
+      window.scrollY + 50
+    }px)`;
     globalSectionParent = parentSection;
     // container.removeChild(parentSection);
   } else if (eventTarget.classList.contains('open-close-section')) {
@@ -174,9 +197,11 @@ container.addEventListener('click', function (event) {
     overlay.classList.remove('hidden');
     overlay.style.top = `${window.scrollY}`;
     document.body.classList.add('overflow-hidden');
-    taskDeletionConfirmModal.style.transform = `translateY(${window.scrollY + 50}px)`;
+    taskDeletionConfirmModal.style.transform = `translateY(${
+      window.scrollY + 50
+    }px)`;
     globalTaskList = tasksList;
-    globalTask =  taskDirectParent;
+    globalTask = taskDirectParent;
   } else if (eventTarget.classList.contains('uncompleted-task')) {
     const checkMark = eventTarget;
     checkMark.classList.add('fa-regular');
@@ -205,6 +230,15 @@ container.addEventListener('click', function (event) {
     checkMark.classList.add('fa-solid');
     checkMark.classList.remove('fa-regular');
     checkMark.classList.remove('completed-task');
+  } else if (eventTarget.classList.contains('edit-task-name')) {
+    overlay.classList.remove('hidden');
+    overlay.style.top = `${window.scrollY}`;
+    document.body.classList.add('overflow-hidden');
+    editTaskModal.style.transform = `translateY(${window.scrollY + 50}px)`;
+    const taskParent = eventTarget.closest('.task');
+    const taskTitle = taskParent.querySelector('.task-titel');
+    editTaskInput.value = taskTitle.textContent;
+    globalTaskTitle = taskTitle;
   }
 });
 const getParent = function (children) {
@@ -254,7 +288,7 @@ const creatTask = function (tasksList, taskTitle) {
             <h4 class="task-titel">${taskTitle}</h4>
             <div class="task-controlers">
             <i class="uncompleted-task fa-solid fa-circle-stop"></i>
-            <i class="fa-regular fa-pen-to-square"></i>
+            <i class="edit-task-name fa-regular fa-pen-to-square"></i>
               <i class="delete-task fa-regular fa-trash-can"></i>
               <i class="fa-regular fa-hourglass"></i>
             </div>

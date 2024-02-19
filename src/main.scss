@@ -82,12 +82,14 @@ body {
   margin: 1vh auto 0;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 250px 1fr;
+  grid-template-rows: 200px 1fr;
 }
 .morning-night {
   overflow: hidden;
   .morning-night-container {
-    width: 250px;
+    transition: 1.5s;
+    transform: translateY(-150px);
+    width: 200px;
     height: 100%;
     border-radius: 50%;
     margin: 0 auto;
@@ -139,13 +141,11 @@ body {
 }
 .give-opacity {
   animation-name: giveOpacity;
-  animation-duration: 5s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
 .remove-opacity {
   animation-name: removeOpacity;
-  animation-duration: 5s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
@@ -161,7 +161,6 @@ body {
 }
 .rotate-animation {
   animation-name: rotateDay;
-  animation-duration: 5s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
@@ -173,7 +172,7 @@ body {
 .todo-container {
   width: 100%;
   max-width: 1000px;
-  padding: 5rem;
+  padding: 0 5rem;
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 1rem;
@@ -277,6 +276,15 @@ body {
     }
   }
 }
+.count-down-modal {
+  top: 50%;
+  left: 30%;
+  .hours,
+  .minutes,
+  .seconds {
+    max-width: 80px;
+  }
+}
 .confirm-section-deletion,
 .confirm-task-deletion {
   left: calc(50% - 150px);
@@ -337,4 +345,7 @@ body {
   95% {
     transform: translateX(0);
   }
+}
+#countDownSound{
+  display: none;
 }

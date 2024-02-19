@@ -11,11 +11,11 @@
     <section class="main-section">
       <div class="morning-night">
         <div class="morning-night-container">
-          <div class="day-wheel rotate-animation">
-            <div class="morning remove-opacity">
-              <img class="sun-bg" src="./images/sunnyDay.jpg" alt="">
+          <div class="day-wheel">
+            <div class="morning ">
+              <img class="sun-bg" src="./images/sunnyDay.jpg" alt="" />
             </div>
-            <div class="night give-opacity">
+            <div class="night">
               <img class="night-bg" src="./images/moonNight.jpg" alt="" />
             </div>
           </div>
@@ -125,10 +125,25 @@
             >
           </div>
         </div>
-        
+        <div class="modal count-down-modal">
+          <div class="modal-header">
+            <h3>Set New Timer&#x23F3;</h3>
+          </div>
+          <div class="modal-content">
+            <input type="text" class="modal-input hours" maxlength="2" />
+            <input type="text" class="modal-input minutes" maxlength="2" />
+            <input type="text" class="modal-input seconds" maxlength="2" />
+            <a href="#" class="btn btn-confirm btn-count-down-confirm"
+              >Done&#x2705;</a
+            >
+            <a href="#" class="btn btn-deny btn-count-down-deny"
+              >Not Yet&#x23F3;</a
+            >
+          </div>
+        </div>
       </main>
     </section>
-
+    <audio src="./effects/timerSound.mp3" id="countDownSound"></audio>
     <script src="./scripts/script.js"></script>
     <script
       src="https://kit.fontawesome.com/5f1fa27ecb.js"

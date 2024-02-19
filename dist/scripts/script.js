@@ -37,12 +37,27 @@ const editTaskModal = document.querySelector('.editing-task');
 const editTaskConfirmBtn = document.querySelector('.btn-new-task-name-confirm');
 const editTaskDenyBtn = document.querySelector('.btn-new-task-name-deny');
 const editTaskInput = document.querySelector('.edit-task-input');
+//For Count Down
+const countDownModal = document.querySelector('.count-down-modal');
+const hoursInput = document.querySelector('.hours');
+const minutesInput = document.querySelector('.minutes');
+const secondsInput = document.querySelector('.seconds');
+const countDownConfirmBtn = document.querySelector('.btn-count-down-confirm');
+const countDownDenyBtn = document.querySelector('.btn-count-down-deny');
+const dayWheel = document.querySelector('.day-wheel');
+const morning = document.querySelector('.morning');
+const night = document.querySelector('.night');
+const dayContainer = document.querySelector('.morning-night-container');
+const countDownSound = document.getElementById('countDownSound');
 //General Perpose Flags
 let globalSectionParent = null;
 let globalTaskList = null;
 let globalTask = null;
 let globalTaskTitle = null;
+let globalTotalSeconds = 0;
 const modalDownRate = -120;
+let countDownId = null;
+
 //For validate confirming
 const validateConfirming = function (targetModal, targetInput, generalPerpose) {
   const inputValue = targetInput.value;
@@ -82,6 +97,58 @@ const validatingDenining = function (targetModal) {
   document.body.classList.remove('overflow-hidden');
   targetModal.style.transform = ``;
 };
+const validateTime = function (hours, minutes, seconds) {
+  const h = Number(hours);
+  const m = Number(minutes);
+  const s = Number(seconds);
+  if (h < 0 || m < 0 || s < 0) {
+    return false;
+  }
+  if (h === 0 && m === 0 && s === 0) {
+    return false;
+  }
+  if (m >= 60 || s >= 60) {
+    return false;
+  }
+};
+const countDownTicks = function (totalSeconds) {
+  dayWheel.classList.add('rotate-animation');
+  dayWheel.style.animationDuration = `${totalSeconds}s`;
+  morning.classList.add('remove-opacity');
+  morning.style.animationDuration = `${totalSeconds}s`;
+  night.classList.add('give-opacity');
+  night.style.animationDuration = `${totalSeconds}s`;
+};
+const TickTack = function () {
+  globalTotalSeconds -= 1;
+  if (globalTotalSeconds === 0) {
+    clearInterval(countDownId);
+    countDownSound.pause();
+  } else {
+    countDownSound.play();
+  }
+};
+countDownConfirmBtn.addEventListener('click', function () {
+  //first get the input values
+  const h = hoursInput.value;
+  const m = minutesInput.value;
+  const s = secondsInput.value;
+  if (validateTime(h, m, s) == false) {
+    hoursInput.classList.add('shake');
+    minutesInput.classList.add('shake');
+    secondsInput.classList.add('shake');
+  } else {
+    const totalSeconds = Number(h) * 60 * 60 + Number(m) * 60 + Number(s);
+    countDownTicks(totalSeconds);
+    dayContainer.style.transform = `translateY(0px)`;
+    validatingDenining(countDownModal);
+    globalTotalSeconds = totalSeconds;
+    countDownId = setInterval(TickTack, 1000);
+  }
+});
+countDownDenyBtn.addEventListener('click', function () {
+  validatingDenining(countDownModal);
+});
 editTaskConfirmBtn.addEventListener('click', function () {
   overlay.classList.add('hidden');
   document.body.classList.remove('overflow-hidden');
@@ -143,6 +210,7 @@ overlay.addEventListener('click', function () {
   editingSectionModal.style.transform = ``;
   newTaskModal.style.transform = ``;
   deletionConfirmModal.transform = '';
+  countDownModal.transform = ``;
 });
 denyNewSectionBtn.addEventListener('click', function () {
   validatingDenining(addingSectionModal);
@@ -246,6 +314,13 @@ container.addEventListener('click', function (event) {
     const taskTitle = taskParent.querySelector('.task-titel');
     editTaskInput.value = taskTitle.textContent;
     globalTaskTitle = taskTitle;
+  } else if (eventTarget.classList.contains('task-timer')) {
+    overlay.classList.remove('hidden');
+    overlay.style.top = `${window.scrollY}`;
+    document.body.classList.add('overflow-hidden');
+    countDownModal.style.transform = `translateY(${
+      window.scrollY + modalDownRate
+    }px)`;
   }
 });
 const getParent = function (children) {
@@ -297,7 +372,7 @@ const creatTask = function (tasksList, taskTitle) {
             <i class="uncompleted-task fa-solid fa-circle-stop"></i>
             <i class="edit-task-name fa-regular fa-pen-to-square"></i>
               <i class="delete-task fa-regular fa-trash-can"></i>
-              <i class="fa-regular fa-hourglass"></i>
+              <i class="task-timer fa-regular fa-hourglass"></i>
             </div>
           </div>`;
   tasksList.innerHTML += task.trim();

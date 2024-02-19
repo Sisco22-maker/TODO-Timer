@@ -73,9 +73,107 @@ body {
   z-index: 5;
 }
 
-.todo-container {
+.main-section {
   max-width: 1000px;
-  margin: 10vh auto 0;
+  margin: 1vh auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 250px 1fr;
+}
+
+.morning-night {
+  overflow: hidden;
+}
+.morning-night .morning-night-container {
+  width: 250px;
+  height: 100%;
+  border-radius: 50%;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+.morning-night .morning-night-container .day-wheel {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+}
+.morning-night .morning-night-container .day-wheel .morning,
+.morning-night .morning-night-container .day-wheel .night {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.morning-night .morning-night-container .day-wheel .morning {
+  overflow: hidden;
+  position: relative;
+  opacity: 1;
+}
+.morning-night .morning-night-container .day-wheel .morning .sun-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.morning-night .morning-night-container .day-wheel .night {
+  transform: rotate(180deg);
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+}
+.morning-night .morning-night-container .day-wheel .night .night-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.give-opacity {
+  animation-name: giveOpacity;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.remove-opacity {
+  animation-name: removeOpacity;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes removeOpacity {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes giveOpacity {
+  to {
+    opacity: 1;
+  }
+}
+.rotate-animation {
+  animation-name: rotateDay;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes rotateDay {
+  to {
+    transform: rotate(180deg);
+  }
+}
+.todo-container {
+  width: 100%;
+  max-width: 1000px;
   padding: 5rem;
   display: grid;
   grid-template-columns: 1fr;
@@ -149,7 +247,7 @@ body {
   grid-template-columns: fr;
   grid-template-rows: 1fr 50px;
   background-color: #2ecc71;
-  transform: translateY(-400px);
+  transform: translateY(-600px);
   transition: 1s;
 }
 .modal .modal-header {

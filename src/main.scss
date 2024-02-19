@@ -4,6 +4,8 @@ $secondary-color: #3498db;
 $secondary-color-dark: #2980b9;
 $light-red: #e74c3c;
 $text-color: #f1f1f1;
+$water-color: #3586ff;
+$night-color: #565fa0;
 $section-padding: 0.5rem 1rem;
 $primary-font-size: 1.5rem;
 $font-family: 'Dosis', sans-serif;
@@ -75,16 +77,108 @@ body {
   z-index: 5;
 }
 //Styling the container
-.todo-container {
+.main-section {
   max-width: 1000px;
-  margin: 10vh auto 0;
+  margin: 1vh auto 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 250px 1fr;
+}
+.morning-night {
+  overflow: hidden;
+  .morning-night-container {
+    width: 250px;
+    height: 100%;
+    border-radius: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    .day-wheel {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(2, 1fr);
+      .morning,
+      .night {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+      .morning {
+        overflow: hidden;
+        position: relative;
+        opacity: 1;
+        .sun-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+        }
+      }
+      .night {
+        transform: rotate(180deg);
+        overflow: hidden;
+        position: relative;
+        opacity: 0;
+        .night-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+        }
+      }
+    }
+  }
+}
+.give-opacity {
+  animation-name: giveOpacity;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.remove-opacity {
+  animation-name: removeOpacity;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes removeOpacity {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes giveOpacity {
+  to {
+    opacity: 1;
+  }
+}
+.rotate-animation {
+  animation-name: rotateDay;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes rotateDay {
+  to {
+    transform: rotate(180deg);
+  }
+}
+.todo-container {
+  width: 100%;
+  max-width: 1000px;
   padding: 5rem;
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 1rem;
 }
 .todo-section {
-  //   background-color: white;
   padding: $section-padding;
   display: grid;
   grid-template-columns: 1fr;
@@ -153,7 +247,7 @@ body {
   grid-template-columns: fr;
   grid-template-rows: 1fr 50px;
   background-color: rgba($primary-color, 1);
-  transform: translateY(-400px);
+  transform: translateY(-600px);
   transition: 1s;
   .modal-header {
     padding: 0.5rem 0;

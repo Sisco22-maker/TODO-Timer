@@ -5,107 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="https:fonts.googleapis.com/css?family=Dosis" />
-    <title>DontKnow</title>
+    <title>TODOTimer&#x23F3;</title>
   </head>
   <body>
-    <main class="todo-container" id="todoContainer">
-      <a href="#" class="new-section-btn btn btn-primary" id="creatNewSection"
-        >New Section</a
-      >
-      <div class="overlay hidden" id="overlay"></div>
-      <div class="modal adding-new-section">
-        <div class="modal-header">
-          <h3>Type Section Name &#x1F4BB;</h3>
-        </div>
-        <div class="modal-content">
-          <input
-            placeholder="Can't Be Blank&#x1F6AB;"
-            type="text"
-            class="modal-input new-add-input"
-          />
-          <a href="#" class="btn btn-confirm btn-confirm-new-section"
-            >Done&#x2705;</a
-          >
-          <a href="#" class="btn btn-deny btn-deny-new-section"
-            >Not Yet&#x23F3;</a
-          >
+    <section class="main-section">
+      <div class="morning-night">
+        <div class="morning-night-container">
+          <div class="day-wheel rotate-animation">
+            <div class="morning remove-opacity">
+              <img class="sun-bg" src="./images/sunnyDay.jpg" alt="">
+            </div>
+            <div class="night give-opacity">
+              <img class="night-bg" src="./images/moonNight.jpg" alt="" />
+            </div>
+          </div>
         </div>
       </div>
-      <div class="modal editing-section">
-        <div class="modal-header">
-          <h3>Retype Section Name &#x1F4BB;</h3>
+      <main class="todo-container" id="todoContainer">
+        <a href="#" class="new-section-btn btn btn-primary" id="creatNewSection"
+          >New Section</a
+        >
+        <div class="overlay hidden" id="overlay"></div>
+        <div class="modal adding-new-section">
+          <div class="modal-header">
+            <h3>Type Section Name &#x1F4BB;</h3>
+          </div>
+          <div class="modal-content">
+            <input
+              placeholder="Can't Be Blank&#x1F6AB;"
+              type="text"
+              class="modal-input new-add-input"
+            />
+            <a href="#" class="btn btn-confirm btn-confirm-new-section"
+              >Done&#x2705;</a
+            >
+            <a href="#" class="btn btn-deny btn-deny-new-section"
+              >Not Yet&#x23F3;</a
+            >
+          </div>
         </div>
-        <div class="modal-content">
-          <input
-            placeholder="Can't Be Blank&#x1F6AB;"
-            type="text"
-            class="modal-input edit-section-input"
-          />
-          <a href="#" class="btn btn-confirm btn-confirm-section-edit"
-            >Done&#x2705;</a
-          >
-          <a href="#" class="btn btn-deny btn-deny-section-edit"
-            >Not Yet&#x23F3;</a
-          >
+        <div class="modal editing-section">
+          <div class="modal-header">
+            <h3>Retype Section Name &#x1F4BB;</h3>
+          </div>
+          <div class="modal-content">
+            <input
+              placeholder="Can't Be Blank&#x1F6AB;"
+              type="text"
+              class="modal-input edit-section-input"
+            />
+            <a href="#" class="btn btn-confirm btn-confirm-section-edit"
+              >Done&#x2705;</a
+            >
+            <a href="#" class="btn btn-deny btn-deny-section-edit"
+              >Not Yet&#x23F3;</a
+            >
+          </div>
         </div>
-      </div>
-      <div class="modal create-new-task">
-        <div class="modal-header">
-          <h3>Task Name &#x1F4DD;</h3>
+        <div class="modal create-new-task">
+          <div class="modal-header">
+            <h3>Task Name &#x1F4DD;</h3>
+          </div>
+          <div class="modal-content">
+            <input
+              placeholder="Can't Be Blank&#x1F6AB;"
+              type="text"
+              class="modal-input create-new-task-input"
+            />
+            <a href="#" class="btn btn-confirm btn-new-task-confirm"
+              >Done&#x2705;</a
+            >
+            <a href="#" class="btn btn-deny btn-new-task-deny"
+              >Not Yet&#x23F3;</a
+            >
+          </div>
         </div>
-        <div class="modal-content">
-          <input
-            placeholder="Can't Be Blank&#x1F6AB;"
-            type="text"
-            class="modal-input create-new-task-input"
-          />
-          <a href="#" class="btn btn-confirm btn-new-task-confirm"
-            >Done&#x2705;</a
-          >
-          <a href="#" class="btn btn-deny btn-new-task-deny">Not Yet&#x23F3;</a>
+        <div class="modal confirm-section-deletion">
+          <div class="modal-header">
+            <h3>Confirm Deletion&#x1F5D1;</h3>
+          </div>
+          <div class="modal-content">
+            <a href="#" class="btn btn-confirm btn-deletion-confirm"
+              >Done&#x2705;</a
+            >
+            <a href="#" class="btn btn-deny btn-deletion-deny"
+              >Not Yet&#x23F3;</a
+            >
+          </div>
         </div>
-      </div>
-      <div class="modal confirm-section-deletion">
-        <div class="modal-header">
-          <h3>Confirm Deletion&#x1F5D1;</h3>
+        <div class="modal confirm-task-deletion">
+          <div class="modal-header">
+            <h3>Confirm Deletion&#x1F5D1;</h3>
+          </div>
+          <div class="modal-content">
+            <a href="#" class="btn btn-confirm btn-task-deletion-confirm"
+              >Done&#x2705;</a
+            >
+            <a href="#" class="btn btn-deny btn-task-deletion-deny"
+              >Not Yet&#x23F3;</a
+            >
+          </div>
         </div>
-        <div class="modal-content">
-          <a href="#" class="btn btn-confirm btn-deletion-confirm"
-            >Done&#x2705;</a
-          >
-          <a href="#" class="btn btn-deny btn-deletion-deny">Not Yet&#x23F3;</a>
+        <div class="modal editing-task">
+          <div class="modal-header">
+            <h3>Type New Task Name &#x1F4DD;&#x2328;</h3>
+          </div>
+
+          <div class="modal-content">
+            <input
+              placeholder="Can't Be Blank&#x1F6AB;"
+              type="text"
+              class="modal-input edit-task-input"
+            />
+            <a href="#" class="btn btn-confirm btn-new-task-name-confirm"
+              >Done&#x2705;</a
+            >
+            <a href="#" class="btn btn-deny btn-new-task-name-deny"
+              >Not Yet&#x23F3;</a
+            >
+          </div>
         </div>
-      </div>
-      <div class="modal confirm-task-deletion">
-        <div class="modal-header">
-          <h3>Confirm Deletion&#x1F5D1;</h3>
-        </div>
-        <div class="modal-content">
-          <a href="#" class="btn btn-confirm btn-task-deletion-confirm"
-            >Done&#x2705;</a
-          >
-          <a href="#" class="btn btn-deny btn-task-deletion-deny">Not Yet&#x23F3;</a>
-        </div>
-      </div>
-      <div class="modal editing-task">
-        <div class="modal-header">
-          <h3>Type Task Name &#x1F5D1;</h3>
-        </div>
-        <div class="modal-content">
-          <input
-            placeholder="Can't Be Blank&#x1F6AB;"
-            type="text"
-            class="modal-input edit-task-input"
-          />
-          <a href="#" class="btn btn-confirm btn-new-task-name-confirm"
-            >Done&#x2705;</a
-          >
-          <a href="#" class="btn btn-deny btn-new-task-name-deny"
-            >Not Yet&#x23F3;</a
-          >
-        </div>
-      </div>
-    </main>
+        
+      </main>
+    </section>
+
     <script src="./scripts/script.js"></script>
     <script
       src="https://kit.fontawesome.com/5f1fa27ecb.js"

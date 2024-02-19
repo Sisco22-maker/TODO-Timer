@@ -42,6 +42,7 @@ let globalSectionParent = null;
 let globalTaskList = null;
 let globalTask = null;
 let globalTaskTitle = null;
+const modalDownRate = -120;
 //For validate confirming
 const validateConfirming = function (targetModal, targetInput, generalPerpose) {
   const inputValue = targetInput.value;
@@ -130,7 +131,9 @@ createNewSection.addEventListener('click', function () {
   overlay.classList.remove('hidden');
   overlay.style.top = `${window.scrollY}`;
   document.body.classList.add('overflow-hidden');
-  addingSectionModal.style.transform = `translateY(${window.scrollY + 50}px)`;
+  addingSectionModal.style.transform = `translateY(${
+    window.scrollY + modalDownRate
+  }px)`;
   newSectionInput.value = '';
 });
 overlay.addEventListener('click', function () {
@@ -157,14 +160,16 @@ container.addEventListener('click', function (event) {
     overlay.classList.remove('hidden');
     overlay.style.top = `${window.scrollY}`;
     document.body.classList.add('overflow-hidden');
-    newTaskModal.style.transform = `translateY(${window.scrollY + 50}px)`;
+    newTaskModal.style.transform = `translateY(${
+      window.scrollY + modalDownRate
+    }px)`;
     newTaskInput.value = '';
   } else if (eventTarget.classList.contains('delete-section')) {
     overlay.classList.remove('hidden');
     overlay.style.top = `${window.scrollY}`;
     document.body.classList.add('overflow-hidden');
     deletionConfirmModal.style.transform = `translateY(${
-      window.scrollY + 50
+      window.scrollY + modalDownRate
     }px)`;
     globalSectionParent = parentSection;
     // container.removeChild(parentSection);
@@ -185,7 +190,7 @@ container.addEventListener('click', function (event) {
     overlay.style.top = `${window.scrollY}`;
     document.body.classList.add('overflow-hidden');
     editingSectionModal.style.transform = `translateY(${
-      window.scrollY + 50
+      window.scrollY + modalDownRate
     }px)`;
     changeSectionName(sectionTitle);
   }
@@ -198,7 +203,7 @@ container.addEventListener('click', function (event) {
     overlay.style.top = `${window.scrollY}`;
     document.body.classList.add('overflow-hidden');
     taskDeletionConfirmModal.style.transform = `translateY(${
-      window.scrollY + 50
+      window.scrollY + modalDownRate
     }px)`;
     globalTaskList = tasksList;
     globalTask = taskDirectParent;
@@ -234,7 +239,9 @@ container.addEventListener('click', function (event) {
     overlay.classList.remove('hidden');
     overlay.style.top = `${window.scrollY}`;
     document.body.classList.add('overflow-hidden');
-    editTaskModal.style.transform = `translateY(${window.scrollY + 50}px)`;
+    editTaskModal.style.transform = `translateY(${
+      window.scrollY + modalDownRate
+    }px)`;
     const taskParent = eventTarget.closest('.task');
     const taskTitle = taskParent.querySelector('.task-titel');
     editTaskInput.value = taskTitle.textContent;

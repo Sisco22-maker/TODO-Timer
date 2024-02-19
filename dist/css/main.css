@@ -1,0 +1,245 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Dosis", sans-serif;
+}
+
+.open-tasks-section {
+  visibility: visible;
+}
+
+.close-tasks-section {
+  visibility: hidden;
+  height: 0px;
+}
+
+.rotate-180-clock-wise {
+  transform: rotate(180deg);
+  transition: 0.1s;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.task-up {
+  order: -1;
+}
+
+.task-down {
+  order: 1;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  justify-self: start;
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.btn-primary {
+  color: #f1f1f1;
+  background-color: #2ecc71;
+}
+
+.btn-confirm {
+  color: #f1f1f1;
+  background-color: #2980b9;
+}
+
+.btn-deny {
+  color: #f1f1f1;
+  background-color: #e74c3c;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  transition: 2s;
+  position: fixed;
+  left: 0;
+  z-index: 5;
+}
+
+.todo-container {
+  max-width: 1000px;
+  margin: 10vh auto 0;
+  padding: 5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1rem;
+}
+
+.todo-section {
+  padding: 0.5rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 1fr;
+}
+.todo-section .section-header {
+  align-items: center;
+  margin-bottom: 1rem;
+  background-color: #3498db;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0.5rem 1rem;
+}
+.todo-section .section-header .section-titel {
+  font-size: 1.5rem;
+  color: #f1f1f1;
+}
+.todo-section .section-header .section-controlers {
+  color: #f1f1f1;
+  font-size: 1.5rem;
+  justify-self: end;
+}
+.todo-section .section-header .section-controlers i {
+  margin-right: 1rem;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+.todo-section .section-tasks {
+  transition: height 0.5s;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1rem;
+}
+.todo-section .section-tasks .task {
+  background-color: #27ae60;
+  color: #f1f1f1;
+  display: grid;
+  padding: 0.8rem 0.5rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+.todo-section .section-tasks .task .task-controlers {
+  justify-self: end;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.todo-section .section-tasks .task .task-controlers i {
+  font-size: 1.5rem;
+  margin-right: 1.25rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.modal {
+  position: absolute;
+  left: calc(50% - 350px);
+  z-index: 10;
+  max-width: 700px;
+  padding: 1rem;
+  height: 170px;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: fr;
+  grid-template-rows: 1fr 50px;
+  background-color: #2ecc71;
+  transform: translateY(-400px);
+  transition: 1s;
+}
+.modal .modal-header {
+  padding: 0.5rem 0;
+}
+.modal .modal-header h3 {
+  color: white;
+  font-size: 1.75rem;
+}
+.modal .modal-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+.modal .modal-content .modal-input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  border: 1px solid #2ecc71;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  padding: 0 0 0 0.5rem;
+}
+.modal .modal-content .modal-input::placeholder {
+  font-size: 1.4rem;
+  color: #e74c3c;
+  opacity: 0;
+}
+
+.confirm-section-deletion,
+.confirm-task-deletion {
+  left: calc(50% - 150px);
+}
+
+.bring-back {
+  transform: translateY(0px);
+}
+
+.show-place-holder::placeholder {
+  opacity: 1 !important;
+}
+
+.shake {
+  animation-name: shakeShok;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+}
+
+@keyframes shakeShok {
+  10% {
+    transform: translateX(-10px);
+  }
+  20% {
+    transform: translateX(0px);
+  }
+  30% {
+    transform: translateX(10px);
+  }
+  40% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  55% {
+    transform: translateX(0);
+  }
+  60% {
+    transform: translateX(5px);
+  }
+  65% {
+    transform: translateX(0);
+  }
+  70% {
+    transform: translateX(-2.5px);
+  }
+  75% {
+    transform: translateX(0);
+  }
+  80% {
+    transform: translateX(2.5px);
+  }
+  85% {
+    transform: translateX(0);
+  }
+  90% {
+    transform: translateX(-1.5px);
+  }
+  95% {
+    transform: translateX(0);
+  }
+}
